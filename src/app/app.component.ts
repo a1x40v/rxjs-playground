@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
-import { Observable, Observer } from 'rxjs';
+import { fromEvent, map, Observable, Observer, takeWhile, tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,34 +15,14 @@ export class AppComponent implements OnInit {
   title = 'rxjs-playground';
 
   ngOnInit(): void {
-    const observable$ = new Observable<number>((subscriber) => {
-      let count = 0;
+    const click$ = fromEvent<MouseEvent>(document, 'click');
 
-      /* sync value */
-      subscriber.next(count++);
-
-      const intervalId = setInterval(() => {
-        /* async value */
-        subscriber.next(count++);
-      }, 1000);
-
-      return () => {
-        console.log('clean up');
-        clearInterval(intervalId);
-      };
-    });
-
-    const observer: Partial<Observer<number>> = {
-      next: (value: number) => {
-        console.log(value);
-      },
-      complete: () => console.log('Complete!'),
-    };
-
-    const sub = observable$.subscribe(observer);
-
-    setTimeout(() => {
-      sub.unsubscribe();
-    }, 3500);
+    click$
+      .pipe(
+        map((evt) => ({ x: evt.clientX, y: evt.clientY })),
+        tap(console.log),
+        takeWhile((coords) => coords.y <= 200, true)
+      )
+      .subscribe();
   }
 }

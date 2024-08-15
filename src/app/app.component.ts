@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
-import { fromEvent, interval, mergeMap, takeUntil } from 'rxjs';
+import { fromEvent, interval, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,13 +15,10 @@ export class AppComponent implements OnInit {
   title = 'rxjs-playground';
 
   ngOnInit(): void {
-    const mousedown$ = fromEvent(document, 'mousedown');
-    const mouseup$ = fromEvent(document, 'mouseup');
+    const click$ = fromEvent(document, 'click');
 
     const interval$ = interval(1000);
 
-    mousedown$
-      .pipe(mergeMap(() => interval$.pipe(takeUntil(mouseup$))))
-      .subscribe(console.log);
+    click$.pipe(switchMap(() => interval$)).subscribe(console.log);
   }
 }

@@ -15,10 +15,8 @@ export class AppComponent implements OnInit {
   title = 'rxjs-playground';
 
   ngOnInit(): void {
-    const click$ = fromEvent(document, 'click');
-
-    const interval$ = interval(1000);
-
-    click$.pipe(switchMap(() => interval$)).subscribe(console.log);
+    // const click$ = fromEvent(document, 'click');
+    // const interval$ = interval(1000);
+    // click$.pipe(switchMap(() => interval$)).subscribe(console.log);
   }
 }

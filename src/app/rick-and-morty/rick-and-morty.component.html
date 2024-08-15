@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="buttons">
+    <button class="button button--start" #buttonStart>Polling</button>
+    <button class="button button--stop" #buttonStop>Stop</button>
+  </div>
+  <div class="card">
+    @if (character) {
+    <p>Id: {{ character.id }}</p>
+    <p>Name: {{ character.name }}</p>
+    <div class="card__image">
+      <img [src]="character.image" [alt]="character.name" />
+    </div>
+    } @else {
+    <div>No character data</div>
+    }
+  </div>
+</div>

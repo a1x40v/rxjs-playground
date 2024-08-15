@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.buttons {
+  padding: 8px;
+  align-self: center;
+}
+
+.button {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button + .button {
+  margin-left: 8px;
+}
+
+.button--start {
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+.button--start:hover,
+.button--start:active {
+  background-color: rgba(0, 255, 0, 0.2);
+}
+
+.button--stop {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.button--stop:hover,
+.button--stop:active {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+.card {
+  min-height: 400px;
+  padding: 15px;
+  border: 1px solid blue;
+}
+
+.card__image {
+  display: flex;
+  justify-content: center;
+}
